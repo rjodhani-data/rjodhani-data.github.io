@@ -184,6 +184,33 @@
 
       <article class="project">
         <div>
+          <h3>AI SQL Analyst: ask your data in plain English</h3>
+          <p class="finding">A Streamlit app that turns business questions into SQL with an LLM, checks the query can only read data, and charts the answer.</p>
+          <p>Works on ~99,000 e-commerce orders in SQLite. The model gets a data dictionary with business rules, failed queries go back to it once for a fix, and three safety layers (SQL check, read-only connection, SQLite authorizer) stop anything except reading. Runs in demo mode without an API key; 31 pytest tests.</p>
+          <ul class="tools" aria-label="Tools used"><li>Python</li><li>SQL</li><li>Streamlit</li><li>LLM APIs</li><li>Plotly</li><li>pytest</li></ul>
+          <div class="links">
+            <a href="https://github.com/rjodhani-data/ai-sql-analyst">Code on GitHub</a>
+          </div>
+        </div>
+        <div class="shot"><img src="assets/sql.png" alt="AI SQL Analyst app showing a question about late deliveries, the generated SQL query and a bar chart of late-delivery rates by state" loading="lazy" width="1600" height="992"></div>
+      </article>
+
+      <article class="project">
+        <div>
+          <h3>Sales forecast and anomaly detection</h3>
+          <p class="finding">Black Friday 2017 brought almost 7x a normal day's revenue, and most other dips were holidays, not problems.</p>
+          <p>Built a clean daily sales series from ~97,000 orders, flagged 25 unusual days with STL decomposition, and forecast the next 30 days with Holt-Winters. I backtested on 8 rolling windows: it beat a "repeat last week" baseline, but only by about one point (12.1% vs 13.2% error), so the dashboard shows an 80% range instead of one number. Includes a Power BI build guide with every DAX measure.</p>
+          <ul class="tools" aria-label="Tools used"><li>Python</li><li>statsmodels</li><li>Power BI</li><li>DAX</li><li>pandas</li></ul>
+          <div class="links">
+            <a href="https://github.com/rjodhani-data/sales-forecast-anomaly-detection">Code on GitHub</a>
+            <a href="https://github.com/rjodhani-data/sales-forecast-anomaly-detection/blob/main/notebooks/sales_forecast_and_anomalies.ipynb">Read the notebook</a>
+          </div>
+        </div>
+        <div class="shot"><img src="assets/forecast.png" alt="Line chart of daily revenue from 2017 to 2018 with anomalies marked in red; Black Friday 2017 spikes to 178 thousand reais" loading="lazy" width="1400" height="553"></div>
+      </article>
+
+      <article class="project">
+        <div>
           <h3>COVID-19 dashboard and risk model</h3>
           <p class="finding">An interactive dashboard of cases and vaccinations across Rhineland-Palatinate, plus a symptom check scored by three ML models.</p>
           <p>Built as a research project at the University of Koblenz. The dashboard covers KPIs, trends, 7-day incidence by severity and a district map. The assessment averages Logistic Regression, Random Forest and Gradient Boosting predictions into one risk score with WHO guidance.</p>
@@ -243,10 +270,10 @@
       <div class="skills">
         <div><h4>Analysis and BI</h4><p>SQL, Python (pandas, NumPy), Power BI (DAX, Power Query), Excel (advanced, VBA), Tableau</p></div>
         <div><h4>Data quality</h4><p>Validation checks for accuracy, completeness and duplicates, data reconciliation, documentation</p></div>
-        <div><h4>Statistics and ML</h4><p>Regression, classification, time-series forecasting (ARIMA), scikit-learn</p></div>
+        <div><h4>Statistics and ML</h4><p>Regression, classification, time-series forecasting (Holt-Winters, ARIMA), anomaly detection, scikit-learn, statsmodels</p></div>
         <div><h4>Data engineering</h4><p>Azure Data Factory, Azure Synapse, ETL pipelines, Docker, Git</p></div>
         <div><h4>Databases</h4><p>MySQL, PostgreSQL, SQL Server, MongoDB</p></div>
-        <div><h4>Also</h4><p>R and R Shiny, Plotly and Dash, Mixpanel, Postman, Jira, LLM tools</p></div>
+        <div><h4>Also</h4><p>LLM APIs (text-to-SQL), Streamlit, R and R Shiny, Plotly and Dash, Mixpanel, Postman, Jira</p></div>
       </div>
     </section>
 
