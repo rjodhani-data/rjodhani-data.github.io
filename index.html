@@ -184,6 +184,41 @@
 
       <article class="project">
         <div>
+          <h3>CRM and contracts data warehouse on Snowflake</h3>
+          <p class="finding">A daily Snowflake pipeline that turns CRM and contract data into a star schema, and stops itself when the data is wrong.</p>
+          <p>Loads Salesforce-style accounts, opportunities, quote lines and contracts, plus live ECB exchange rates from a REST API, into Snowflake through a stage and COPY INTO. Staging types and de-duplicates re-sent records; the marts are a star schema with 3 fact and 4 dimension tables and USD conversion. Seven Snowflake Tasks run as a DAG with parallel dimension builds, and the last task logs 12 data quality checks and fails the run on errors. The same SQL runs locally on DuckDB with matching row counts.</p>
+          <ul class="tools" aria-label="Tools used"><li>Snowflake</li><li>Snowflake Tasks</li><li>SQL</li><li>Python</li><li>DuckDB</li><li>pytest</li></ul>
+          <div class="links">
+            <a href="https://github.com/rjodhani-data/crm-snowflake-warehouse">Code on GitHub</a>
+          </div>
+        </div>
+        <div class="shot" style="padding:18px 10px 8px">
+          <svg viewBox="0 0 520 430" role="img" aria-labelledby="dagTitle dagDesc">
+            <title id="dagTitle">Snowflake Tasks DAG</title>
+            <desc id="dagDesc">Seven Snowflake tasks: load raw data, staging, then the date dimension and business dimensions in parallel, then facts, reporting views and a data quality task that fails the run on errors.</desc>
+            <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8a96a8"/></marker></defs>
+            <g font-family="Schibsted Grotesk, sans-serif" font-size="15">
+              <path d="M260 60 C260 73.0, 260 73.0, 260 86" fill="none" stroke="#8a96a8" stroke-width="1.5" marker-end="url(#ah)"/>
+              <path d="M240 132 C240 145.0, 135 145.0, 135 158" fill="none" stroke="#8a96a8" stroke-width="1.5" marker-end="url(#ah)"/>
+              <path d="M280 132 C280 145.0, 385 145.0, 385 158" fill="none" stroke="#8a96a8" stroke-width="1.5" marker-end="url(#ah)"/>
+              <path d="M135 204 C135 217.0, 240 217.0, 240 230" fill="none" stroke="#8a96a8" stroke-width="1.5" marker-end="url(#ah)"/>
+              <path d="M385 204 C385 217.0, 280 217.0, 280 230" fill="none" stroke="#8a96a8" stroke-width="1.5" marker-end="url(#ah)"/>
+              <path d="M260 276 C260 289.0, 260 289.0, 260 302" fill="none" stroke="#8a96a8" stroke-width="1.5" marker-end="url(#ah)"/>
+              <path d="M260 348 C260 361.0, 260 361.0, 260 374" fill="none" stroke="#8a96a8" stroke-width="1.5" marker-end="url(#ah)"/>
+              <rect x="150" y="16" width="220" height="44" rx="8" fill="#fff" stroke="#2a78d6" stroke-width="2"/><text x="260.0" y="35" text-anchor="middle" font-weight="600" fill="#172033">t1_load_raw</text><text x="260.0" y="51" text-anchor="middle" font-size="12" fill="#586274">COPY INTO from stage · daily 07:00</text>
+              <rect x="150" y="88" width="220" height="44" rx="8" fill="#fff" stroke="#c9d1dd" stroke-width="1.2"/><text x="260.0" y="107" text-anchor="middle" font-weight="600" fill="#172033">t2_staging</text><text x="260.0" y="123" text-anchor="middle" font-size="12" fill="#586274">type, trim, de-duplicate</text>
+              <rect x="30" y="160" width="210" height="44" rx="8" fill="#fff" stroke="#c9d1dd" stroke-width="1.2"/><text x="135.0" y="179" text-anchor="middle" font-weight="600" fill="#172033">t3_dim_date</text><text x="135.0" y="195" text-anchor="middle" font-size="12" fill="#586274">calendar dimension</text>
+              <rect x="280" y="160" width="210" height="44" rx="8" fill="#fff" stroke="#c9d1dd" stroke-width="1.2"/><text x="385.0" y="179" text-anchor="middle" font-weight="600" fill="#172033">t3_dimensions</text><text x="385.0" y="195" text-anchor="middle" font-size="12" fill="#586274">account, product, rep</text>
+              <rect x="150" y="232" width="220" height="44" rx="8" fill="#fff" stroke="#c9d1dd" stroke-width="1.2"/><text x="260.0" y="251" text-anchor="middle" font-weight="600" fill="#172033">t4_facts</text><text x="260.0" y="267" text-anchor="middle" font-size="12" fill="#586274">3 fact tables, USD</text>
+              <rect x="150" y="304" width="220" height="44" rx="8" fill="#fff" stroke="#c9d1dd" stroke-width="1.2"/><text x="260.0" y="323" text-anchor="middle" font-weight="600" fill="#172033">t5_reporting_views</text><text x="260.0" y="339" text-anchor="middle" font-size="12" fill="#586274">BI-ready views</text>
+              <rect x="150" y="376" width="220" height="44" rx="8" fill="#fff" stroke="#c9d1dd" stroke-width="1.2"/><text x="260.0" y="395" text-anchor="middle" font-weight="600" fill="#172033">t6_data_quality</text><text x="260.0" y="411" text-anchor="middle" font-size="12" fill="#586274">12 checks · fails run on errors</text>
+            </g>
+          </svg>
+        </div>
+      </article>
+
+      <article class="project">
+        <div>
           <h3>AI SQL Analyst: ask your data in plain English</h3>
           <p class="finding">A Streamlit app that turns business questions into SQL with an LLM, checks the query can only read data, and charts the answer.</p>
           <p>Works on ~99,000 e-commerce orders in SQLite. The model gets a data dictionary with business rules, failed queries go back to it once for a fix, and three safety layers (SQL check, read-only connection, SQLite authorizer) stop anything except reading. Runs in demo mode without an API key; 31 pytest tests.</p>
@@ -271,8 +306,8 @@
         <div><h4>Analysis and BI</h4><p>SQL, Python (pandas, NumPy), Power BI (DAX, Power Query), Excel (advanced, VBA), Tableau</p></div>
         <div><h4>Data quality</h4><p>Validation checks for accuracy, completeness and duplicates, data reconciliation, documentation</p></div>
         <div><h4>Statistics and ML</h4><p>Regression, classification, time-series forecasting (Holt-Winters, ARIMA), anomaly detection, scikit-learn, statsmodels</p></div>
-        <div><h4>Data engineering</h4><p>Azure Data Factory, Azure Synapse, ETL pipelines, Docker, Git</p></div>
-        <div><h4>Databases</h4><p>MySQL, PostgreSQL, SQL Server, MongoDB</p></div>
+        <div><h4>Data engineering</h4><p>Snowflake (Tasks, stages, COPY INTO), Azure Data Factory, Azure Synapse, ETL/ELT pipelines, dimensional modelling (star schema), Docker, Git</p></div>
+        <div><h4>Databases</h4><p>Snowflake, MySQL, PostgreSQL, SQL Server, MongoDB, DuckDB</p></div>
         <div><h4>Also</h4><p>LLM APIs (text-to-SQL), Streamlit, R and R Shiny, Plotly and Dash, Mixpanel, Postman, Jira</p></div>
       </div>
     </section>
@@ -281,7 +316,7 @@
       <div class="contact">
         <div>
           <h2>Contact</h2>
-          <p>Looking for data analyst roles in Rajkot, Ahmedabad, Bengaluru or remote. Available to join immediately.</p>
+          <p>Looking for data analyst and data engineering roles in Rajkot, Ahmedabad, Bengaluru or remote. Available to join immediately.</p>
           <a class="btn primary" href="mailto:rajvijodhani1998@gmail.com">Email me</a>
         </div>
         <dl>
